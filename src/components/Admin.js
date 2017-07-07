@@ -8,6 +8,8 @@ export class Admin extends React.Component {
   render() {
     const { trains, updateTrains } = this.props;
 
+    const { authStatus } = this.props;
+
     return (
       <div id="wrapper">
         <h2>Manage Trains:</h2>
@@ -18,6 +20,7 @@ export class Admin extends React.Component {
               {...train}
               updateTrains={updateTrains}
               canEdit={true}
+              token={authStatus.token}
             />
           )}
         </div>

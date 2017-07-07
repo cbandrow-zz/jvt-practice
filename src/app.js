@@ -12,9 +12,16 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
-      <Route path="admin" component={Admin} />
+      <Route path="admin" component={Admin} onEnter={requireAuth} />
       <Route path="login" component={Login} />
     </Route>
   </Router>,
   document.querySelector('#root')
 );
+
+const requireAuth = (nextState, replace) => {
+  let token = localStorage.getItem('token');
+  if (!token) {
+    replace({ pathname: '/login' })
+  }
+}
